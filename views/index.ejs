@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Bidding</title>
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+    <link rel="stylesheet" href="/style.css">
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+   
+  <style>
+   .dot {
+    height: 9px;
+    width: 9px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0.0; }
+}
+</style>
+</head>
+<body style="background-color: #f3f3f3">
+   <nav  class="navbar fixed-top navbar-expand-lg navbar-dark">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bid-4-U</a>
+        </div>
+    
+    <div id="navbar" class="navbar-collapse collapse" id="navbarSupportedContent">
+    <!-- <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent"> -->
+    
+    <ul class="nav navbar-nav navbar-right ">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+         <% if(user)
+                    {%>
+                    <li class="nav-item"><a class="nav-link" href="/biddetail/?use=<%= user.name %>?use=<%= user.email %>">ADD BID</a></li>
+                      <%} %>
+                     <% if(!user)
+                    {%>
+                    <li class="nav-item"><a class="nav-link" href="/users/login">ADD BID</a></li>
+                      <%} %>
+                      
+
+                       <% if(!user)
+                   {%>
+                    <li class="nav-item"><a class="nav-link" href="/users/login">LOGIN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/register">REGISTER</a></li>
+                      <%} %>
+                    <% if(user)
+                    {%>
+                     <li class="nav-item"><a class="nav-link" href="/users/logout">LOGOUT <%=user.name  %></a></li>
+                        <%} %>
+          
+               </ul>
+         </div>
+      </div>
+       </nav>
+<br><br>
+<div class="container bidadd">
+    <!-- <div class="jumbotron " id="main_section"> -->
+        
+        <% for(var i=bidadd.length-1; i>=0; i--) {%>
+          <div class="col-md-4" >
+           <div class="mcard" id="cart-view">
+              <div class="mcard-header text-center" style="background-color: #3b3460; color: #fff">
+                <!-- <div class="col-md-2 minline"></div><div class="col-md-8 minline"> -->
+                  <ul class="minline font-small ">
+                    <li class="left">Ends In: </li>
+                    <li class="right" id="demo<%= i %>" ></li>
+                  </ul>
+                <!-- </div><div class="col-md-2 minline"></div> -->
+              </div>
+                <!--Card image-->
+                <img class="cardImg" src="<%= bidadd[i].photo %>" alt="Sample">
+              <!--Card content-->
+                <div class="mcontainer">
+                    <!--Title-->
+                    <h4 class="card-title"><%= bidadd[i].itemname %></h4>
+                     <p id="postdescription" class="card-text" style="margin-bottom: 0px;"><%= bidadd[i].description %></p>
+                  <div class="mrow">                               
+                    <div class="mcol-md-6 minline">
+                      <!-- subtitle -->
+                      <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 5px;">Starting Bid: <%= bidadd[i].minprice %></h6>
+                      <h5><span class="dot blink"></span>  Current Bid : <%= bidadd[i].curr_bid %></h5>
+                     <h6 id="demo<%= i %>" class="card-subtitle mb-2 text-muted" style="margin-top: 5px;"></h6>
+                    </div>
+                    <div class="mcol-md-6 minline">
+                        <%if(user)
+                        {%>             
+                       
+                          <button type="button" class="mbutton itembidding" data-id="<%= bidadd[i]._id.toString()%>" data-email="<%= bidadd[i].email %>" data-toggle="modal" data-target="#bidAddModal">Bid On Item</button>
+                          
+                          <script>
+                            $(document).ready(function(){
+                            $(".itembidding").click(function(){ // Click to only happen on announce links
+                        var Id = $(this).data('id');
+                           console.log(Id);
+                           var ema= $(this).data('email');
+                              $(".modal-body #postid").val( Id );
+                            $(".modal-body #email").val( ema );
+                          
+                                 });
+                                   });
+                          </script>
+                        <%}%>
+                         <%if(!user)
+                         {%>             
+                       <a href="users/login" class="mbutton" type="submit">Bid On Item</a>
+                        
+                        <%}%>
+                    </div>
+                  </div>     
+              </div><br>
+               <div class="mcard-footer text-center" >
+                      <ul class="minline font-small mt-3">
+                        <li class="" ><a href="#" class="white-text" style="color: #000;"> Posted by - <%= bidadd[i].name %></a></li>
+                      </ul>
+                  </div>
+           </div><br>
+           </div>
+          <script type="text/javascript">
+             var act= "<%= bidadd[i].timeperiod%>";
+          var countDownDate<%= i %> = new Date(act).getTime();
+          var x<%= i %> = setInterval(function() {
+            var now<%= i %> = new Date().getTime();
+            var distance<%= i %> = countDownDate<%= i %> - now<%= i %>;
+            var days<%= i %> = Math.floor((distance<%= i %> )/ (1000 * 60 * 60 * 24));
+            var hours<%= i %> = Math.floor(((distance<%= i %> )% (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes<%= i %> = Math.floor(((distance<%= i %> )% (1000 * 60 * 60)) / (1000 * 60));
+            var seconds<%= i %> = Math.floor(((distance<%= i %> )% (1000 * 60)) / 1000);
+            document.getElementById("demo<%= i %>").innerHTML = days<%= i %> + "d " + hours<%= i %> + "h "
+            + minutes<%= i %> + "m " + seconds<%= i %> + "s ";
+            if (distance<%= i %> < 0) {
+              clearInterval(x<%= i %>);
+              document.getElementById("demo<%= i %>").innerHTML = "EXPIRED";
+            }
+          }, 1000);  
+          </script>
+
+         <% } %>  
+    
+</div>
+   <hr class="footerline" style="background-color: #3B3460">
+      <footer class="footer" style="background-color: #3b3460">
+          <center><p style="color:#f6f6f6; padding-top: 10px;font-size: 15px;" >© 2018 BID-4-U.com   All Rights Reserved.</p>
+           
+
+            <div style="margin-top:-10px;"><a href="https://www.facebook.com/ymcamart/" target="_blank">
+              <i class="fa fa-facebook-official icon-large" aria-hidden="true" style="color:white;margin-left: 10px;">
+                
+              </i>
+            </a>
+            <i class="fa fa-twitter-square" aria-hidden="true"  style="color:white;margin-left: 10px;">
+              
+            </i>
+            </div>
+          </center>
+      <br>
+      </footer>
+      <!-- Modal -->
+      <div id="bidAddModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              
+                 <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Add Your Bid</h4>
+                </div> 
+                <form action="/bidmoney" method="post">
+                  <div class="modal-body">
+                     <label for="money">Your Amount</label>
+                    <input type="text" name="money" placeholder="money">
+                    <input type="hidden" id="postid" name="postid" value="" >
+                    <input type="hidden" id="email" name="email" value="">
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Add Money"></button>
+                  </div>  
+                </form>
+            </div>    
+      </div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/bc4369196c.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>

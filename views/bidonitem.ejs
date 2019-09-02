@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AddMoney</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="home.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css"
+</head>
+<body>
+<form action="/bidmoney" method="POST">
+  
+ <input type="text" name="money" placeholder="money">
+  <input type="hidden" name="postid" value="<%= bid.id%>">
+  <input type="text" name="email" value="<%= email.email%>">
+  <br>
+  <br>
+  <button type="submit">add money</button>
+</form>
+</body>
+</html>

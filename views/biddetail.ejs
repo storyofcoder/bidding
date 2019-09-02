@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BID-4-U || Now Do Bidding Easily</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/style.css">
+
+
+    <style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #3b3460;
+   color: white;
+   text-align: center;
+}
+</style>
+  
+  
+    
+
+</head>
+
+<body style="background-color: #f3f3f3">
+
+   <nav  class="navbar fixed-top navbar-expand-lg navbar-dark">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bid-4-U</a>
+        </div>
+    
+    <div id="navbar" class="navbar-collapse collapse" id="navbarSupportedContent">
+    <!-- <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent"> -->
+    
+    <ul class="nav navbar-nav navbar-right ">
+        <li class="nav-item ">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+         <% if(user)
+                    {%>
+                    <li class="nav-item active"><a class="nav-link" href="/biddetail/?use=<%= user.name %>?use=<%= user.email %>">ADD BID</a></li>
+                      <%} %>
+                     <% if(!user)
+                    {%>
+                    <li class="nav-item active"><a class="nav-link" href="/users/register">ADD BID</a></li>
+                      <%} %>
+                      
+
+                       <% if(!user)
+                   {%>
+                    <li class="nav-item"><a class="nav-link" href="/users/login">LOGIN</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/users/register">REGISTER</a></li>
+                      <%} %>
+                    <% if(user)
+                    {%>
+                     <li class="nav-item"><a class="nav-link" href="/users/logout">LOGOUT</a></li>
+                       <%} %>
+          
+               </ul>
+         </div>
+      </div>
+       </nav>
+
+ <br><br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3" class="minline"></div>
+      <div class="col-lg-6">
+        <div class="mcard w-100">
+          
+            <div class="mcontainer">
+              <div class="card-body w-100">
+                  <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb bg-dark text-white mx-auto" style="background-color: #3b3460;">
+                      <li class="breadcrumb-item mx-auto active" aria-current="page" style="color: #fff">Add Item For Bid</li>
+                    </ol>
+                  </nav>
+                  
+            <form action="/bidadd" enctype="multipart/form-data" accept-charset="UTF-8" method="POST">
+              <div class="form-group">
+              <label>Item name</label>
+              <div class="form-row">    
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Item Name" name="itemname" autofocus="autofocus" required="true" >
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <label for="exampleInputContact">Bid Price</label>
+                <input type="number" class="form-control" id="exampleInputContact" aria-describedby="ContactHelp" placeholder="Price of ur item" name="minprice" required="true">
+              </div>
+             <div class="form-group">
+                <label for="exampleInputEmai1">Description Of Item</label>
+                <textarea type="text" class="form-control" id="exampleInputEmai1" aria-describedby="emailHelp" placeholder="enter smthing which describe ur item" name="description" required="true"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Date of Bid End</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Bid End Time" name="timeperiod" required="true">
+              </div>
+               
+                <input type="hidden" name="email" value="<%= user.email %>">
+                     <input type="hidden" name="curr_bid" value="0">
+                     <input type="file" name="myimage" required="true"/>
+                  <input type="hidden"  name="photo" >
+                   <input type="hidden"  name="name" value="<%= user.name %>">
+                  
+             <center><button type="submit" class="btn btn-primary"  name="commit" id="submit_button">SUBMIT</button></center>
+            </form>
+            <br/>
+          </div></div></div></div>
+
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+  </div>
+  
+<hr class="footerline" style="background-color: #3b3460">
+    <footer class="footer">
+        <center><p style="color:#f6f6f6; padding-top: 10px;font-size: 15px;" >© 2018 BID-4-U.com   All Rights Reserved.</p>
+         
+
+          <div style="margin-top:-10px;"><a href="https://www.facebook.com/ymcamart/" target="_blank">
+            <i class="fa fa-facebook-official icon-large" aria-hidden="true" style="color:white;margin-left: 10px;">
+              
+            </i>
+          </a>
+          <i class="fa fa-twitter-square" aria-hidden="true"  style="color:white;margin-left: 10px;">
+            
+          </i>
+          </div>
+        </center>
+    <br>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</body>
+</html>
