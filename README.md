@@ -1,17 +1,5 @@
 # Bidding Project
-
-If you're looking for a good deal, you'll find it at online auction websites. Cars, jewelry, clothing, books, homes, and land are all available on our site
-
-College minor project
-
-
-### Live at : https://bidding-1.herokuapp.com/
-
-```- Kirti ``` - MEAN stack developer
-
-
-# Bidding Project
-> Online auction platform that provides users with great deals than ever on cars, clothing, books, homes, and land are all available on our site.
+> Online auction platform that provides users with great deals than ever on cars, clothing, books, homes, and land are all available on our site <br>Live at : https://bidding-1.herokuapp.com/
 
 ## General info
 This project is designed and implemented during my B.tech period as a minior - project to submitted in college, overall project is well designed and implemented.
