@@ -5,7 +5,14 @@
 This project is designed and implemented during my B.tech period as a minior - project to submitted in college, overall project is well designed and implemented.
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+``` Sign in ```
+![SignIn](https://raw.githubusercontent.com/storyofcoder/bidding/master/screenshots/login.jpg)
+
+``` Sign up ```
+![SignUp](https://raw.githubusercontent.com/storyofcoder/bidding/master/screenshots/signup.jpg)
+
+``` Home ```
+![Home](https://raw.githubusercontent.com/storyofcoder/bidding/master/screenshots/home.jpg)
 
 ## Technologies
 * Node.js
